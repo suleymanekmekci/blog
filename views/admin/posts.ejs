@@ -1,0 +1,71 @@
+<%- include ('./header') %>
+
+
+<div id="layoutSidenav_content">
+    <div class="container-fluid">
+        <form action="/admin/do-post" method="POST" onsubmit="return doPost(this);">
+            <main>
+                <div class="form-group mt-4">
+                    <label for="title">Title</label>
+                    <input required type="text" name="title" id="title" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea required name="content" id="content" class="form-control"></textarea>
+                </div>
+
+                <a href="/" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+        </main>
+        <table class="table">
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            <% articles.forEach(function (article) { %>
+            <tr>
+                <td><%= article.title%></td>
+                <td><%= article.content%></td>
+                <td> <%= article.createdAt.toLocaleDateString()%></td>
+                <td>
+
+                    <a href="/articles/edit/<%= article.id %>" class="btn btn-warning">Edit</a>
+                    <form action="/articles/delete/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+
+            <% }) %>
+
+        </table>
+
+    </div>
+
+
+</div>
+
+
+<script>
+    function doPost(form) {
+        $.ajax({
+            url: '/admin/do-post',
+            method: "POST",
+            data: { title: form.title.value, content: form.content.value },
+            success: function (response) {
+                alert(response);
+                window.location.href = "/admin/posts";
+            }
+        })
+        return false;
+    }
+</script>
+
+
+
+<%- include ('./footer') %>

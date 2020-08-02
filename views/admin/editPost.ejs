@@ -1,0 +1,44 @@
+<%- include ('./header') %>
+
+<div id="layoutSidenav_content">
+    <div class="container-fluid">
+        <form action="/articles/do-edit-post/<%= article.id %>" method="POST" onsubmit="return doEditPost(this);">
+            <main>
+                <div class="form-group mt-4">
+                    <label for="title">Title</label>
+                    <input required type="text" name="title" id="title" class="form-control"
+                        value="<%= article.title %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea required name="content" id="content"
+                        class="form-control"><%= article.content %></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-warning" value="Edit">Edit</button>
+            </main>
+
+    </div>
+    </form>
+
+</div>
+
+<script>
+    var id = '<%= article.id %>'
+
+    function doPost(form) {
+        $.ajax({
+            url: '/articles/do-edit-post/' + id,
+            method: "POST",
+            data: { title: form.title.value, content: form.content.value, id: id },
+            success: function (response) {
+                alert(response)
+            }
+        })
+        return false;
+    }
+</script>
+
+
+<%- include ('./footer') %>
