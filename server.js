@@ -6,7 +6,11 @@ const methodOverride = require('method-override')
 const articleRoute = require('./routes/articles')
 const adminRoute = require('./routes/admin')
 
-mongoose.connect('mongodb://localhost/blog', {
+const PORT = process.env.PORT || 3000;
+
+const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/blog'
+
+mongoose.connect(CONNECTION_URI, {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: true
 })
 
@@ -41,6 +45,7 @@ app.use('/admin', adminRoute)
 app.use('/articles', articleRoute)
 
 
-app.listen(3000, (req, res) => {
-    console.log("Port 3000");
+
+app.listen(PORT, (req, res) => {
+    console.log(`Server is listening on port ${PORT}`);
 })
