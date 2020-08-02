@@ -64,16 +64,6 @@ router.get('/do-logout', (req, res) => {
     res.redirect('/admin')
 })
 
-/*
-router.post('/createAdmin', async (req, res) => {
-    const admin = new Admin({
-        email: "email",
-        password: "password"
-    })
-
-    await admin.save()
-    res.send('admin saved successfuly')
-})*/
 
 
 module.exports = router
