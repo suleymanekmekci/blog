@@ -68,7 +68,7 @@ router.get('/do-logout', (req, res) => {
 router.post('/createAdmin', async (req, res) => {
     const admin = new Admin({
         email: "admin@hotmail.com",
-        password: "1234"
+        password: "kyounuke123"
     })
 
     await admin.save()
